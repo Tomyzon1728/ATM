@@ -6,6 +6,7 @@ Created on Sun Sep  8 18:17:13 2019
 """
 
 from tkinter import *
+from PIL import Image,ImageTk
 import os
 answer = ''
 score = ''
