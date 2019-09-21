@@ -8,73 +8,22 @@ Created on Sun Sep  8 18:17:13 2019
 from tkinter import *
 from PIL import Image,ImageTk
 import os
+import mysql.connector
 answer = ''
 score = ''
-def RegisterUser ():
-    username_info = username.get()
-    password_info = password.get()
-    
-    file = open(username_info,'w')
-    file.write(username_info+'\n')
-    file.write(password_info)
-    file.close()
-    
-    username_entry.delete(0,'end')
-    password_entry.delete(0,'end')
-    
-    Label(screen1,text = 'Registration Sucess',fg = 'green',font = ('calibri',11)).pack()
-    
-def Register():
-    global screen1
-    screen1 = Toplevel(screen)
-    screen1.title('Register')
-    screen1.geometry('300x250')
-    #screen1.wm_iconbitmap('aduser.ico')
-    
-    global username
-    global password
-    global username_entry
-    global password_entry
-    username = StringVar()
-    password = StringVar()
-    
-    Label(screen1,text = 'Please Enter Details Below').pack()
-    Label(screen1,text = '',fg = 'green',font = ('calibri',11)).pack()
-    Label(screen1,text = 'Username  * ' ,fg = 'green',font = ('calibri',11)).pack()
-    
-   
-    
-    username_entry = Entry(screen1, textvariable = username)
-    username_entry.pack()
-    Label(screen1,text = 'Password  * ' ,fg = 'green',font = ('calibri',11)).pack()
-    password_entry = Entry(screen1, textvariable = password, show = '*')
-    password_entry.pack()
-    Label(screen1, text = '').pack()
-    Button(screen1,text = 'Register',height = '2', width = '30', bg='#FFFACD', command = RegisterUser).pack()
-def delete2():
-    screen3.destroy()
-def delete3():
-    screen4.destroy()
-def delete4():
-    screen5.destroy()
-def LoginSucess():
-    global screen3
-    screen3 = Toplevel(screen)
-    screen3.title('Sucessful Login')
-    screen3.geometry('300x250')
-    #screen3.wm_iconbitmap('aduser.ico')
-    Label(screen3,text = 'Sucess').pack()
-    Button(screen3,text = 'LOGIN SUCESS',command = test,bg = 'green').pack()
+Score = ''
+mycon = mysql.connector.connect(host='localhost',user= 'root',password='',database='cbt_db')
+mycursor= mycon.cursor(dictionary = True)
 def test():
     screen6 = Toplevel(screen)
     screen6.title('CBT Test')
-    #screen6.wm_iconbitmap('computer.ico')
+    screen6.wm_iconbitmap('computer.ico')
 
 
 
-    #img = Image.open('shugar.JPG')
-    #img1 = ImageTk.PhotoImage(img, master = root)
-    frm1 = Label(screen6,anchor='nw',relief = SUNKEN,compound ='left',bg = 'navy blue',fg= '#00ffff', height = 5,text = ' SHUGARREYLUMINATIONS \nComputer Based Test', font =('courier',20, 'bold'))
+    img = Image.open('shugar.JPG')
+    img1 = ImageTk.PhotoImage(img, master = screen6)
+    frm1 = Label(screen6,anchor='nw',image= img1,relief = SUNKEN,compound ='left',bg = 'navy blue',fg= '#00ffff', height = 73,text = ' SHUGARREYLUMINATIONS \nComputer Based Test', font =('courier',20, 'bold'))
     frm1.pack(side = 'top',fill = BOTH)
 
 
@@ -106,27 +55,27 @@ def test():
     val9 = group9.get()
 
 #-----------------------------------n0 1-------------------------------------------------------
-    qfrm = Label(frm ,text = '1. What is the name of the first democratic president?',height =1)
+    qfrm = Label(frm ,text = '1. What is the name of the first democratic president?',height =1, font =('courier',11, 'bold'))
     qfrm.pack(side = 'left')
 #----------------------------------------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group,text = 'Olusegun Obasanjo', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group,text = 'Olusegun Obasanjo', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group,text = 'Muhammadu  Buhari  ', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group,text = 'Muhammadu  Buhari  ', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group,text = 'Goodluck Jonathan', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group,text = 'Goodluck Jonathan', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group,text = 'Sukar  Dimka  ', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group,text = 'Sukar  Dimka  ', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #------------------------------------n0 2----------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '2. What year did Nigeria become a republic?',height = 2)
+    qfrm = Label(frm ,text = '2. What year did Nigeria become a republic?',height = 2, font =('courier',11, 'bold'))
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -134,20 +83,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group1,text = '1960', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group1,text = '1960', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group1,text = '  1958  ', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group1,text = '  1958  ', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group1,text = '1963', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group1,text = '1963', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group1,text = '  1914  ', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group1,text = '  1914  ', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #--------------------------------------n0 3------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '3. What is the name of the first Head of state?',height = 1)
+    qfrm = Label(frm , font =('courier',11, 'bold'),text = '3. What is the name of the first Head of state?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -155,20 +104,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group2,text = 'Murtala Mohammed', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group2,text = 'Murtala Mohammed', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group2,text = 'Aguyi Ironsi ', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group2,text = 'Aguyi Ironsi ', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group2,text = 'Yakubu Gowon', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group2,text = 'Yakubu Gowon', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group2,text = 'Ibrahim Banbagida', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group2,text = 'Ibrahim Banbagida', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #-------------------------------------------------n0 4---------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '4. The current Nigerian constitution was last ammended?',height = 2)
+    qfrm = Label(frm , font =('courier',11, 'bold'),text = '4. The current Nigerian constitution was last ammended?',height = 2)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -176,20 +125,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group3,text = '1945', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group3,text = '1945', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group3,text = '1979 ', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group3,text = '1979 ', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group3,text = '1999', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group3,text = '1999', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group3,text = '1983', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group3,text = '1983', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #-----------------------------------------n0 5--------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '5. Who was the first Nigerian President?',height = 1)
+    qfrm = Label(frm , font =('courier',11, 'bold'),text = '5. Who was the first Nigerian President?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -197,20 +146,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group4,text = 'Tafawa Balewa', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group4,text = 'Tafawa Balewa', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group4,text = 'Nnamdi Azikiwe', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group4,text = 'Nnamdi Azikiwe', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group4,text = 'Shehu Shagari', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group4,text = 'Shehu Shagari', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group4,text = 'Olusegun Obasanjo', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group4,text = 'Olusegun Obasanjo', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #--------------------------------------------n0 6---------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '6. When was the first Nigerian military coup?',height = 1)
+    qfrm = Label(frm , font =('courier',11, 'bold'),text = '6. When was the first Nigerian military coup?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -218,20 +167,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group5,text = '1958', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group5,text = '1958', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group5,text = '1975', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group5,text = '1975', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group5,text = '1985', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group5,text = '1985', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group5,text = '1966', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group5,text = '1966', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #-----------------------------------------n0 7---------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '7. Who was the first Nigerian interim President?',height = 1)
+    qfrm = Label(frm, font =('courier',11, 'bold') ,text = '7. Who was the first Nigerian interim President?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -239,20 +188,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group6,text = 'Ernest Sonekan', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group6,text = 'Ernest Sonekan', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group6,text = 'Abubakar Abdusalam', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group6,text = 'Abubakar Abdusalam', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group6,text = 'Moshood Abiola', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group6,text = 'Moshood Abiola', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group6,text = 'Jaja Wackuwku', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group6,text = 'Jaja Wackuwku', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #-----------------------------------------------n0 8-------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '8. What year did Nigeria win her first international gold- medal?',height = 1)
+    qfrm = Label(frm, font =('courier',11, 'bold') ,text = '8. What year did Nigeria win her first international gold- medal?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -260,20 +209,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group7,text = '1954', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group7,text = '1954', value = 'a', tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group7,text = '1950', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group7,text = '1950', value = 'b', tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group7,text = '1996', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group7,text = '1996', value = 'c', tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group7,text = '2012', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group7,text = '2012', value = 'd', tristatevalue=0).pack(side = 'left')
 
 #------------------------------------------no 9-------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '9. Who master-minded the first Nigerian military coup?',height = 1)
+    qfrm = Label(frm, font =('courier',11, 'bold') ,text = '9. Who master-minded the first Nigerian military coup?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -281,20 +230,20 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group8,text = 'Kaduna Nzeogwu', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group8,text = 'Kaduna Nzeogwu', value = 'a',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group8,text = 'Emmanuel Ifeajuna', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group8,text = 'Emmanuel Ifeajuna', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group8,text = 'Gideon Okar', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group8,text = 'Gideon Okar', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group8,text = 'Mamman Vatsa', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group8,text = 'Mamman Vatsa', value = 'd',tristatevalue=0).pack(side = 'left')
 
 #----------------------------------------------------------------------------------------------
     frm = Label(screen6,height = 1)
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '10.Nigeria is currently in her?',height = 1)
+    qfrm = Label(frm , font =('courier',11, 'bold'),text = '10.Nigeria is currently in her?',height = 1)
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -302,14 +251,14 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    Radiobutton(frm,variable = group9,text = 'Fourth Republic', value = 'a').pack(side = 'left')
+    Radiobutton(frm,variable = group9,text = 'Fourth Republic', value = 'a',tristatevalue=0).pack(side = 'left')
 
 
-    Radiobutton(frm,variable = group9,text = 'Fisrt Republic', value = 'b').pack(side = 'left')
+    Radiobutton(frm,variable = group9,text = 'Fisrt Republic', value = 'b',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group9,text = 'Fifth Republic', value = 'c').pack(side = 'left')
+    Radiobutton(frm,variable = group9,text = 'Fifth Republic', value = 'c',tristatevalue=0).pack(side = 'left')
 
-    Radiobutton(frm,variable = group9,text = 'Second Republic', value = 'd').pack(side = 'left')
+    Radiobutton(frm,variable = group9,text = 'Second Republic', value = 'd',tristatevalue=0).pack(side = 'left')
 
 
     frm2 = Label(screen6, bg = 'navy blue', height = 3)
@@ -321,17 +270,17 @@ def PasswordNotVerified():
     screen4 = Toplevel(screen)
     screen4.title('Unsucessful Login')
     screen4.geometry('300x250')
-    #screen4.wm_iconbitmap('aduser.ico')
-    Label(screen4,text = 'Unverified Password').pack()
-    Button(screen4,text = 'LOGIN FAILED',command = delete3,bg = 'red').pack() 
+    screen4.wm_iconbitmap('aduser.ico')
+    Label(screen4,text = 'Unverified Password', font =('courier',11, 'bold')).pack()
+    Button(screen4,text = 'LOGIN FAILED',command = delete3,bg = 'red', font =('courier',10, 'bold')).pack() 
 def UserNotFound():
     global screen5
     screen5 = Toplevel(screen)
     screen5.title('Unsucessful Login')
     screen5.geometry('300x250')
-    #screen5.wm_iconbitmap('aduser.ico')
-    Label(screen5,text = 'User Not Found').pack()
-    Button(screen5,text = 'LOGIN FAILED',command = delete4,bg = 'red').pack()
+    screen5.wm_iconbitmap('aduser.ico')
+    Label(screen5,text = 'User Not Found', font =('courier',11, 'bold')).pack()
+    Button(screen5,text = 'LOGIN FAILED',command = delete4,bg = 'red', font =('courier',10, 'bold')).pack()
     
 
 def LoginVerify():
@@ -340,11 +289,15 @@ def LoginVerify():
     username_entry1.delete(0,'end')
     password_entry1.delete(0,'end')
     
-    file_list = os.listdir()
-    if username1 in  file_list:
-        file1 = open(username1, 'r')
-        verify = file1.read().splitlines()
-        if password1 in verify:
+    sql = 'SELECT * FROM registration WHERE user_name = %s'
+    adr = (username1,)
+    mycursor.execute(sql,adr)
+   
+    result = mycursor.fetchall()
+    
+    if len(result) > 0:
+    
+        if password1 == result[0]['password']:
             LoginSucess()
         else:
             PasswordNotVerified()
@@ -356,9 +309,9 @@ def Login():
     screen2 = Toplevel(screen)
     screen2.title('Login')
     screen2.geometry('300x250')
-    #screen2.wm_iconbitmap('aduser.ico')
-    Label(screen2,text = 'Please Enter Details Below to Login').pack()
-    Label(screen2, text = 'Password').pack()
+    screen2.wm_iconbitmap('aduser.ico')
+    Label(screen2,text = 'Please Enter Details Below to Login', font =('courier',9, 'bold')).pack()
+    Label(screen2, text = 'Password', font =('courier',11, 'bold')).pack()
     global username_verify
     global password_verify
     
@@ -368,26 +321,82 @@ def Login():
     global username_entry1
     global password_entry1
 
-    Label(screen2,text = 'Username  * ').pack()
+    Label(screen2,text = 'Username  * ', font =('courier',11, 'bold')).pack()
     username_entry1 = Entry(screen2, textvariable = username_verify)
     username_entry1.pack()
-    Label(screen2, text = 'Password *').pack()
+    Label(screen2, text = 'Password *', font =('courier',11, 'bold')).pack()
     password_entry1 = Entry(screen2, textvariable = password_verify, show = '*')
     password_entry1.pack()
     Label(screen2, text = '').pack()
-    Button(screen2,text = 'Login',height = '1', fg='#F08080', bg='#FFFACD', width = '30', command = LoginVerify).pack()
-
+    Button(screen2,text = 'Login',height = '1', fg='navy blue', bg='#00ffff', width = '30', command = LoginVerify, font =('courier',10, 'bold')).pack()
+def RegisterUser ():
+    username_info = username.get()
+    password_info = password.get()
+    
+  
+    sql = 'INSERT INTO registration(user_name,password) VALUES(%s,%s)'
+    val = (username_info,password_info)
+    mycursor.execute(sql,val)
+    mycon.commit()
+    print(mycursor.rowcount,'Record Inserted successfully')
+    
+    username_entry.delete(0,'end')
+    password_entry.delete(0,'end')
+    
+    Label(screen1,text = 'Registration Sucess',fg = 'green', font =('courier',11, 'bold')).pack()
+    
+def Register():
+    global screen1
+    screen1 = Toplevel(screen)
+    screen1.title('Register')
+    screen1.geometry('300x250')
+    screen1.wm_iconbitmap('aduser.ico')
+    
+    global username
+    global password
+    global username_entry
+    global password_entry
+    username = StringVar()
+    password = StringVar()
+    
+    Label(screen1,text = 'Please Enter Details Below', font =('courier',11, 'bold')).pack()
+    Label(screen1,text = '',fg = 'green', font =('courier',11, 'bold')).pack()
+    Label(screen1,text = 'Username  * ' ,fg = 'green', font =('courier',11, 'bold')).pack()
+    
+   
+    
+    username_entry = Entry(screen1, textvariable = username)
+    username_entry.pack()
+    Label(screen1,text = 'Password  * ' ,fg = 'green', font =('courier',11, 'bold')).pack()
+    password_entry = Entry(screen1, textvariable = password, show = '*')
+    password_entry.pack()
+    Label(screen1, text = '').pack()
+    Button(screen1,text = 'Register',height = '2', width = '30', bg='#00ffff',fg = 'navy blue', command = RegisterUser, font =('courier',10, 'bold')).pack()
+def delete2():
+    screen3.destroy()
+def delete3():
+    screen4.destroy()
+def delete4():
+    screen5.destroy()
+def LoginSucess():
+    global screen3
+    screen3 = Toplevel(screen)
+    screen3.title('Sucessful Login')
+    screen3.geometry('300x250')
+    screen3.wm_iconbitmap('aduser.ico')
+    Label(screen3,text = 'Click Button to start Test', font =('courier',11, 'bold')).pack()
+    Button(screen3,text = 'Click Here',command = test,bg = 'green', font =('courier',10, 'bold')).pack()
 def MainScreen():
     global screen
     screen = Tk()
     screen.geometry('300x250')
     screen.title('SignUp')
-    #screen.wm_iconbitmap('aduser.ico')
-    Label(text = 'Management Register Login System',bg = 'orange',width= '300',height= '2',font = ('calibri',13)).pack()
-    Button(text = 'Login',height = '2', fg='#F08080', bg='#FFFACD', width = '30', command = Login).pack()
+    screen.wm_iconbitmap('aduser.ico')
+    
+    Label(text = 'Computer Based Test on\nHistory',bg = 'navy blue',fg ='#00ffff', width= '300',height= '2', font =('courier',13, 'bold')).pack()
     Label( text = '').pack()
-    Button(text = 'Register',height = '2', fg='#F08080', bg='#FFFACD', width = '30', command = Register).pack()
-     
+    Button(text = 'Login', font =('courier',10, 'bold'),height = '2', fg='navy blue', bg='#00ffff', width = '30', command = Login).pack()
+    Label( text = '').pack()
+    Button(text = 'Register', font =('courier',10, 'bold'),height = '2', fg='navy blue', bg='#00ffff', width = '30', command = Register).pack()
     screen.mainloop()
-
 MainScreen()
