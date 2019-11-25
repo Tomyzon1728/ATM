@@ -7,14 +7,86 @@ Created on Sun Sep  8 18:17:13 2019
 
 from tkinter import *
 from PIL import Image,ImageTk
-import os
 import mysql.connector
-answer = ''
-score = ''
-Score = ''
+
+screen_entry = ''
 mycon = mysql.connector.connect(host='localhost',user= 'root',password='',database='cbt_db')
 mycursor= mycon.cursor(dictionary = True)
+
+'''def calculate():
+    global group
+    val  = group.get()
+    val1 = group1.get()
+    val2 = group2.get()
+    val3 = group3.get()
+    val4 = group4.get()
+    val5 = group5.get()
+    val6 = group6.get()
+    val7 = group7.get()
+    val8 = group8.get()
+    val9 = group9.get() 
+    
+    print(val)
+    #print(val2)'''
 def test():
+    
+    def calculate():
+        val  = group.get()
+        val1 = group1.get()
+        val2 = group2.get()
+        val3 = group3.get()
+        val4 = group4.get()
+        val5 = group5.get()
+        val6 = group6.get()
+        val7 = group7.get()
+        val8 = group8.get()
+        val9 = group9.get() 
+        #print(val)
+        #print(val1)
+        #print(val2)
+        #print(val3)
+        #print(val4)
+        #print(val5)
+        #print(val6)
+        #print(val7)
+        #print(val8)
+        #print(val9)
+        
+        score =0
+        if val == 'a':
+            score+=5
+        if val1 == 'c':
+            score += 5
+        if val2 == 'b':
+            score += 5
+        if val3 == 'c':
+            score += 5
+        if val4 == 'b':
+            score += 5
+        if val5 == 'd':
+            score += 5
+        if val6 == 'a':
+            score += 5
+        if val7 == 'a':
+            score += 5
+        if val8 == 'b':
+            score += 5
+        if val9 == 'a':
+            score += 5
+        
+        print(score)
+        #lab2.insert(score)
+    
+    group =StringVar()
+    group1=StringVar()
+    group2=StringVar()
+    group3=StringVar()
+    group4=StringVar()
+    group5=StringVar()
+    group6=StringVar()
+    group7=StringVar()
+    group8=StringVar()
+    group9=StringVar()
     screen6 = Toplevel(screen)
     screen6.title('CBT Test')
     screen6.wm_iconbitmap('computer.ico')
@@ -31,29 +103,9 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-
-
-    group = StringVar()
-    group1 = StringVar()
-    group2= StringVar()
-    group3 = StringVar()
-    group4 = StringVar()
-    group5 = StringVar()
-    group6 = StringVar()
-    group7 = StringVar()
-    group8 = StringVar()
-    group9 = StringVar()
-    val = group.get()
-    val1 = group1.get()
-    val2 = group2.get()
-    val3 = group3.get()
-    val4 = group4.get()
-    val5 = group5.get()
-    val6 = group6.get()
-    val7 = group7.get()
-    val8 = group8.get()
-    val9 = group9.get()
-
+  
+    
+    
 #-----------------------------------n0 1-------------------------------------------------------
     qfrm = Label(frm ,text = '1. What is the name of the first democratic president?',height =1, font =('courier',11, 'bold'))
     qfrm.pack(side = 'left')
@@ -75,7 +127,7 @@ def test():
     frm.pack(side = 'top',fill = BOTH)
     frm.grid_propagate(0)
 
-    qfrm = Label(frm ,text = '2. What year did Nigeria become a republic?',height = 2, font =('courier',11, 'bold'))
+    qfrm = Label(frm ,text = '2.Nigeria became a republici year ?',height = 2, font =('courier',11, 'bold'))
     qfrm.pack(side = 'left')
 
 #-------------------------------------------------------------------------------------------
@@ -260,11 +312,14 @@ def test():
 
     Radiobutton(frm,variable = group9,text = 'Second Republic', value = 'd',tristatevalue=0).pack(side = 'left')
 
-
-    frm2 = Label(screen6, bg = 'navy blue', height = 3)
-    frm2.pack(side = 'bottom',fill = BOTH)
-    btn = Button(frm2,relief = GROOVE,text = 'S U B M I T',padx= 16, bd = 2, fg='navy blue',font =('serif',10, 'bold'),bg = '#00ffff',command =Score)
+    lab2 = Label(screen6, bg = '#00ffff', height = 3)
+    lab2.pack(side = 'bottom',fill = BOTH)
+    btn = Button(lab2,relief = GROOVE,text = 'S U B M I T',padx= 16, bd = 2, fg='#00ffff',font =('serif',10, 'bold'),bg = 'navy blue',command=calculate)
     btn.pack(side = 'left')
+    #screen_entry = Entry(frm2)
+    #screen_entry.pack(side = 'left')
+
+
 def PasswordNotVerified():
     global screen4
     screen4 = Toplevel(screen)
@@ -274,7 +329,6 @@ def PasswordNotVerified():
     Label(screen4,text = 'Unverified Password', font =('courier',11, 'bold')).pack()
     Button(screen4,text = 'LOGIN FAILED',command = delete3,bg = 'red', font =('courier',10, 'bold')).pack() 
 def UserNotFound():
-    global screen5
     screen5 = Toplevel(screen)
     screen5.title('Unsucessful Login')
     screen5.geometry('300x250')
