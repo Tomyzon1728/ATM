@@ -9,7 +9,7 @@ from tkinter import *
 from PIL import Image,ImageTk
 import mysql.connector
 
-screen_entry = ''
+screen_entry = '  '
 mycon = mysql.connector.connect(host='localhost',user= 'root',password='',database='cbt_db')
 mycursor= mycon.cursor(dictionary = True)
 
@@ -41,16 +41,6 @@ def test():
         val7 = group7.get()
         val8 = group8.get()
         val9 = group9.get() 
-        #print(val)
-        #print(val1)
-        #print(val2)
-        #print(val3)
-        #print(val4)
-        #print(val5)
-        #print(val6)
-        #print(val7)
-        #print(val8)
-        #print(val9)
         
         score =0
         if val == 'a':
